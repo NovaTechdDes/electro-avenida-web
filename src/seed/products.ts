@@ -6,7 +6,8 @@ export const products: Product[] = [
     nombre: "Casble THW Calibre 12",
     marca: "Kalop",
     categoria: "Cables",
-    imagen: "https://www.kalop.com.ar/wp-content/uploads/2024/01/210-001.jpg",
+    descripcion: "",
+    imagenes: ["/imagenes/1.jpg", "/imagenes/2.jpg", "/imagenes/3.jpg"],
     datos: ["Medida: 12", "Tipo: THW"],
   },
 ];
