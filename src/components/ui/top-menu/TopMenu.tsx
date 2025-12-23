@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const TopMenu = () => {
   return (
-    <header className="bg-white flex justify-between items-center px-10 py-2">
+    <header className="bg-white flex justify-between items-center px-10 py-2 fixed border-b border-gray-200 w-full">
       <Link href="/">
         <Image
           src="/imagenes/EA.webp"
