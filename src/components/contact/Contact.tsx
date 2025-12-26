@@ -3,7 +3,10 @@ import { FormContact } from "./FormContact";
 
 export const Contact = () => {
   return (
-    <div id="contact" className="text-black flex justify-center flex-col pb-10">
+    <section
+      id="contacto"
+      className="text-black flex justify-center flex-col pb-10"
+    >
       <h2 className="text-4xl font-bold text-center mt-5">
         Solicita tu Cotizacion
       </h2>
@@ -16,6 +19,6 @@ export const Contact = () => {
         <FormContact />
         <DataContact />
       </div>
-    </div>
+    </section>
   );
 };

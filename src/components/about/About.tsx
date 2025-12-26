@@ -13,7 +13,10 @@ const list = [
 
 export const About = () => {
   return (
-    <div className="bg-[#171717] py-10 px-5 flex flex-col md:flex-row">
+    <section
+      id="nosotros"
+      className="bg-[#171717] py-10 items-center px-10 flex flex-col md:flex-row"
+    >
       {/*Texto*/}
       <div>
         <h2 className="text-2xl font-bold">
@@ -43,6 +46,6 @@ export const About = () => {
       <div>
         <Image src="/imagenes/EA.webp" alt="EA" width={500} height={500} />
       </div>
-    </div>
+    </section>
   );
 };

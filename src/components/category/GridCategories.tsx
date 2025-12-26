@@ -6,8 +6,10 @@ const data = categories;
 
 export const GridCategories = () => {
   return (
-    <div className="flex justify-center flex-col items-center">
-      <h2 className="text-2xl font-bold text-black">Nuestas Categorias</h2>
+    <div className="flex justify-center flex-col items-center dark:bg-[#171717] py-5 border-t border-gray-500 dark:border-gray-500">
+      <h2 className="text-2xl font-bold text-black dark:text-white ">
+        Nuestas Categorias
+      </h2>
       <p className="text-slate-500">
         Explora nuesta amplia gama de productos electricos organizados por
         categoria

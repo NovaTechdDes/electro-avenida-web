@@ -29,7 +29,7 @@ export const TopMenu = () => {
         </Link>
         <Link
           className="m-2 p-2 rounded-md transition-all hover:bg-gray-500 hover:text-yellow-500"
-          href="/nosotros"
+          href="#nosotros"
         >
           Nosotros
         </Link>
