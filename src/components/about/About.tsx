@@ -23,7 +23,7 @@ export const About = () => {
           ¿Por Que Elegir{" "}
           <span className="text-yellow-500">Electro Avenida</span>?
         </h2>
-        <p className="w-1/2 mt-5">
+        <p className="w-[700px] mt-5">
           Somos tu socio confiable en materiales electricos. Ofrecemos
           soluciones integrales para electrisistas profesionas, contratistas y
           proyectos residentes
@@ -43,8 +43,14 @@ export const About = () => {
       </div>
 
       {/*Imagen*/}
-      <div>
-        <Image src="/imagenes/EA.webp" alt="EA" width={500} height={500} />
+      <div className="flex justify-center">
+        <Image
+          src="/imagenes/nosotros.jpg"
+          alt="EA"
+          width={500}
+          height={500}
+          className="w-[800px] h-[600px] rounded-lg"
+        />
       </div>
     </section>
   );
