@@ -1,80 +1,94 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { BsArrowRight } from "react-icons/bs";
+import { SwiperSlide, Swiper } from "swiper/react";
+import { Autoplay, Navigation } from "swiper/modules";
+
+import "swiper/css";
+
+import "swiper/css/navigation";
+
+import "./slideShow.css";
+import { IoMdArrowForward } from "react-icons/io";
+
+const slides = [
+  {
+    image: "/imagenes/swiper1.jpg",
+    title: "Materiales Eléctricos",
+    subtitle: "Calidad profesional para tus proyectos",
+    url: "/productos",
+    texto: "Ver Productos",
+  },
+  {
+    image: "/imagenes/swiper2.jpg",
+    title: "Iluminación LED",
+    subtitle: "Eficiencia y diseño moderno",
+    url: "/categoria/Iluminacion",
+    texto: "Ver Iluminacion",
+  },
+  {
+    image: "/imagenes/swiper3.jpg",
+    title: "Soluciones Industriales de cableado",
+    subtitle: "Cableado de calidad para tus proyectos con Sello IRAM",
+    url: "/categoria/Cables",
+    texto: "Ver Cables",
+  },
+];
 
 export const Carousel = () => {
   return (
-    <div className="mt-[55px] bg-[#171717] min-h-[700px] pb-10 w-full flex justify-center">
-      <div className="flex  items-center w-[50%] pb-5 pt-20 flex-col">
-        <h1 className="text-5xl p-5 text-center font-bold">
-          Materiales Electricos de{" "}
-          <span className="text-yellow-500">Calidad Superior</span>
-        </h1>
-
-        <p className="text-lg p-5 text-center text-gray-200">
-          Tu aliado confiable en soluciones electricas. Amplio catalogo de
-          productos para profesionales y proyectos residenciales.
-        </p>
-
-        <div className="flex gap-5">
-          <button className="flex items-center gap-2 bg-yellow-500 text-black rounded-lg p-2 font-semibold hover:bg-yellow-600 cursor-pointer">
-            Ver Catalogo
-            <BsArrowRight />
-          </button>
-          <button className="bg-transparent border rounded-lg border-white text-white p-2 cursor-pointer hover:bg-white hover:text-black hover:border-black transition-all">
-            <Link href="#contacto">Contactar Ahora</Link>
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-{
-  /*
-
-  
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
-
-import "./slideShow.css";
-
-  import { Swiper as SwiperObjet } from "swiper";
-import { useState } from "react";
-import { SwiperSlide, Swiper } from "swiper/react";
-import Image from "next/image";
-  import { Autoplay, FreeMode, Navigation, Thumbs } from "swiper/modules";
-  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperObjet>();
-  
-        <Swiper
-        className="mySwiper"
+    <section className="mt-[55px] h-[700px] pb-10 w-full">
+      <Swiper
         spaceBetween={10}
-        navigation
+        navigation={true}
+        slidesPerView={1}
         autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
+          delay: 2500,
         }}
-        thumbs={{
-          swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
-        }}
-        modules={[FreeMode, Navigation, Thumbs, Autoplay]}
+        modules={[Navigation, Autoplay]}
+        className="mySwiper"
       >
-        {["1.jpg", "2.jpg", "3.jpg"].map((img) => (
-          <SwiperSlide key={img} className="relative">
-            <Image
-              height={500}
-              width={500}
-              src={`/imagenes/${img}`}
-              alt=""
-              className="object-cover w-full h-150"
-              priority
-            />
+        {slides.map((slide) => (
+          <SwiperSlide key={slide.image}>
+            <div className="w-full h-full relative">
+              <Image
+                src={slide.image}
+                alt={slide.title}
+                width={1024}
+                height={800}
+                className="rounded-lg object-cover w-full h-full"
+              />
+
+              <div className="absolute inset-0 bg-black/50">
+                <div className="absolute inset-0 flex items-center justify-center flex-col text-center">
+                  <h2 className="text-2xl text-white font-bold">
+                    {slide.title}
+                  </h2>
+                  <p className="text-lg text-white font-semibold">
+                    {slide.subtitle}
+                  </p>
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center gap-5 top-35">
+                  <Link
+                    href={slide.url}
+                    className="bg-yellow-500 rounded-lg p-2 text-black flex items-center gap-2 cursor-pointer hover:bg-yellow-600 transition-all"
+                  >
+                    {slide.texto ?? "Mas Info"}
+                    <IoMdArrowForward />
+                  </Link>
+                  <Link
+                    className="text-white border rounded-lg p-2 cursor-pointer hover:bg-white hover:text-black hover:border-black transition-all"
+                    href="#contacto"
+                  >
+                    Contactar Ahora
+                  </Link>
+                </div>
+              </div>
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
-
-  */
-}
+    </section>
+  );
+};
