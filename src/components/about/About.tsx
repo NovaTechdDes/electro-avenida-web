@@ -15,7 +15,7 @@ export const About = () => {
   return (
     <section
       id="nosotros"
-      className="bg-[#171717] py-10 items-center px-10 flex flex-col md:flex-row"
+      className="bg-[#171717] py-10 border-t border-gray-500 dark:border-gray-500 items-center px-10 flex flex-col md:flex-row"
     >
       {/*Texto*/}
       <div>

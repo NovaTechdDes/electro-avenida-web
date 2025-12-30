@@ -11,6 +11,7 @@ export const TopMenu = () => {
           alt="Electro Avenida"
           width={200}
           height={200}
+          className="w-auto h-auto"
         />
       </Link>
 

@@ -1,12 +1,16 @@
-import prisma from "@/src/config/prisma";
+import { getCategory } from "@/src/actions/category-actions";
 import { CategoryCard } from "./CategoryCard";
 import { iconsMaps } from "@/src/seed/icons";
 import { unstable_noStore as noStore } from "next/cache";
 
 export const GridCategories = async () => {
   noStore();
-  const categorias = await prisma.category.findMany();
-  console.log(categorias[0]);
+
+  const { categories, ok } = await getCategory();
+
+  if (!ok) {
+    return;
+  }
 
   return (
     <div className="flex justify-center flex-col items-center dark:bg-[#171717] py-5 border-t border-gray-500 dark:border-gray-500">
@@ -17,12 +21,12 @@ export const GridCategories = async () => {
         Explora nuesta amplia gama de productos electricos organizados por
         categoria
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 justify-center mt-5">
-        {categorias.map((category) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 justify-center mt-5">
+        {categories.map((category) => (
           <CategoryCard
-            key={category.id}
-            title={category.name}
-            description={category.description}
+            key={category._id}
+            nombre={category.nombre}
+            descripcion={category.descripcion}
             icon={category.img as keyof typeof iconsMaps}
           />
         ))}

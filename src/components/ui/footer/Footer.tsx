@@ -10,7 +10,13 @@ export const Footer = () => {
     <div className="bg-[#171717]">
       <div className="flex justify-between p-10">
         <div>
-          <Image src="/imagenes/EA.webp" alt="EA" width={100} height={100} />
+          <Image
+            src="/imagenes/EA.webp"
+            alt="EA"
+            className="w-auto h-auto"
+            width={100}
+            height={100}
+          />
           <p className="text-white w-[300px] text-xs mt-5">
             Tu provedor confiable de materiales electricos con mas de 15 años de
             experiencia.
