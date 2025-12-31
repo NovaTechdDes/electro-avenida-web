@@ -1,34 +1,12 @@
-import { dbConnect } from "../lib/dbConect";
-import { Product, ProductImage } from "../models";
+"use server";
 
-export const getProducts = async (description?: string) => {
+export const getProducts = async (page = 1, limit = 10, search = "") => {
   try {
-    await dbConnect();
-    let products;
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/products?page=${page}&limit=${limit}&search=${search}`
+    );
 
-    if (!description) {
-      products = await Product.find({ web: true }).limit(10).lean();
-    } else {
-      console.log(description);
-      products = await Product.find({
-        web: true,
-        description: { $regex: description, $options: "i" },
-      })
-        .limit(10)
-        .lean();
-    }
-
-    //console.log(products);
-
-    const images = await ProductImage.find().lean();
-
-    //console.log(images);
-
-    return {
-      ok: true,
-      products,
-      msg: "Productos obtenidos correctamente",
-    };
+    return await res.json();
   } catch (error) {
     console.error(error);
     return {

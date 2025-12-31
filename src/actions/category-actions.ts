@@ -1,3 +1,4 @@
+"use server";
 import { dbConnect } from "../lib/dbConect";
 import { Category } from "../models";
 

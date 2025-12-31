@@ -38,6 +38,10 @@ const productSchema = new Schema({
     required: true,
     trim: true,
   },
+  imagenes: {
+    type: Array,
+    default: [],
+  },
 });
 
 export const Product = models.Product || model("Product", productSchema);

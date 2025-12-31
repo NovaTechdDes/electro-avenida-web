@@ -4,6 +4,10 @@ import { getProducts } from "@/src/actions";
 export const GridProductsFeatured = async () => {
   const { products } = await getProducts();
 
+  if (!products) {
+    return <div>No hay productos</div>;
+  }
+
   return (
     <div className="flex justify-center items-center flex-col pt-20 border-t border-gray-500 dark:border-gray-500 pb-15 dark:bg-[#171717]">
       <h2 className="text-2xl font-bold text-black dark:text-white">

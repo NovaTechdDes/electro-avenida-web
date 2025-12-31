@@ -1,6 +1,6 @@
 import { getProducts } from "@/src/actions";
-import { ProductCard } from "@/src/components";
-import { BuscadorProducto } from "@/src/components/products/BuscadorProducto";
+import { ProductosClient } from "@/src/components/products/ProductosClient";
+import Pagination from "@/src/components/ui/pagination/Pagination";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,11 +9,23 @@ export const metadata: Metadata = {
     "Todos los productos electricos de calidad para instalaciones domiciliarias, comerciales e industriales y para la decoracion de interiores.",
 };
 
-const Productos = async () => {
-  const { products } = await getProducts();
+interface Props {
+  searchParams: {
+    page: string;
+    limit: string;
+    search: string;
+  };
+}
+
+const Productos = async ({ searchParams }: Props) => {
+  const page = Number((await searchParams).page) || 1;
+  const limit = Number((await searchParams).limit) || 10;
+  const search = (await searchParams).search || "";
+
+  const { products, totalPages } = await getProducts(page, limit, search);
 
   return (
-    <div className="min-h-[90vh] pt-25 bg-[#171717]">
+    <div className="min-h-[90vh] pt-25 border-b border-gray-500">
       <h1 className="text-5xl font-bold text-center text-white">
         Todos los Productos
       </h1>
@@ -21,13 +33,9 @@ const Productos = async () => {
         Explora nuesto catalogo completo de materiales electricos
       </p>
 
-      <BuscadorProducto />
+      <ProductosClient products={products} />
 
-      <div className="mt-5 px-5 pb-10 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-        {products.map((producto) => (
-          <ProductCard key={producto._id} product={producto} />
-        ))}
-      </div>
+      <Pagination totalPages={totalPages} />
     </div>
   );
 };

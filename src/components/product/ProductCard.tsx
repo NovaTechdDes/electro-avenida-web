@@ -1,7 +1,7 @@
 "use client";
 
 import { Product } from "@/src/interface";
-import { useProductsStore } from "@/src/store";
+import Image from "next/image";
 import Link from "next/link";
 import { IoChatbubbleOutline } from "react-icons/io5";
 
@@ -10,37 +10,34 @@ interface Props {
 }
 
 export const ProductCard = ({ product }: Props) => {
-  const { marca, descripcion, rubro } = product;
-  const { search } = useProductsStore();
-
-  if (
-    !descripcion.toLowerCase().includes(search.toLowerCase()) &&
-    !marca.toLowerCase().includes(search.toLowerCase())
-  )
-    return null;
+  const { marca, descripcion, rubro, imagenes, _id } = product;
 
   return (
     <div className="border border-gray-400 rounded-lg justify-center flex flex-col cursor-pointer ">
       <div className="rounded-t-lg w-full ">
-        {/*<Image
-          src={imagenes[0]}
-          alt={nombre}
-          width={200}
-          height={200}
-          className="w-full rounded-t-lg h-70 object-cover transition-transform duration-300 ease-in-out hover:scale-105"
-        />*/}
+        {imagenes?.length > 0 && (
+          <Image
+            src={imagenes?.[0] ?? ""}
+            alt={descripcion}
+            width={200}
+            height={200}
+            className="w-full rounded-t-lg h-70 object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+          />
+        )}
       </div>
 
       <Link
         href={`/producto/${product._id}`}
         className="bg-white dark:bg-[#171717] hover:bg-gray-900 transition-all"
       >
-        <div className="p-4 ">
-          <p className="text-yellow-500 font-semibold">{rubro}</p>
+        <div className="p-4 flex flex-col">
+          <p className="text-yellow-500 font-semibold my-2">{_id}</p>
           <h3 className="font-semibold text-xl text-black dark:text-white">
             {descripcion}
           </h3>
-          <p className="text-gray-300 dark:text-gray-300 text-sm ">{marca}</p>
+          <span className="text-gray-300 self-end border w-fit border-yellow-500 rounded-lg px-2 py-1 dark:text-gray-300 text-sm my-1">
+            {marca}
+          </span>
         </div>
 
         <div className="p-4 flex justify-center">

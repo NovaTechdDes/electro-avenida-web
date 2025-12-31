@@ -2,14 +2,35 @@ import { dbConnect } from "@/src/lib/dbConect";
 import { Product } from "@/src/models/Product";
 import { NextResponse } from "next/server";
 
-export async function GET(request: Request) {
+export async function GET(req: Request) {
   try {
     await dbConnect();
-    const products = await Product.find({ web: true });
-    console.log(products);
+    const { searchParams } = new URL(req.url);
+    const page = Number(searchParams.get("page")) || 1;
+    const limit = Number(searchParams.get("limit")) || 10;
+    const search = searchParams.get("search") || "";
+
+    const query: any = { web: true };
+
+    const skip = (page - 1) * limit;
+
+    console.log(search);
+
+    if (search) {
+      query.$text = { $search: search };
+    }
+
+    const [products, total] = await Promise.all([
+      Product.find(query).skip(skip).limit(limit).lean(),
+      Product.countDocuments(query),
+    ]);
+
     return NextResponse.json({
       ok: true,
       products,
+      total,
+      totalPages: Math.ceil(total / limit),
+      page,
     });
   } catch (error) {
     console.error(error);

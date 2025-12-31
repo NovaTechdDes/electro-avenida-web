@@ -7,4 +7,5 @@ export interface Product {
   datos: string[];
   rubro: string;
   subRubro: string;
+  imagenes: string[];
 }
