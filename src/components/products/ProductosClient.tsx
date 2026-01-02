@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { BuscadorProducto } from "./BuscadorProducto";
-import { Product } from "@/src/interface";
-import { ProductCard } from "../product/ProductCard";
+import { BuscadorProducto } from './BuscadorProducto';
+import { Product } from '@/src/interface';
+import { ProductCard } from '../product/ProductCard';
 
 interface Props {
   products: Product[];
 }
 
-export const ProductosClient = ({ products }: Props) => {
+export const ProductosClient = ({ products = [] }: Props) => {
   return (
     <>
       <BuscadorProducto />

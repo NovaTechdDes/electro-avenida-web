@@ -2,7 +2,7 @@
 import { dbConnect } from "../lib/dbConect";
 import { Category } from "../models";
 
-export const getCategory = async () => {
+export const getCategories = async () => {
   try {
     await dbConnect();
     const categories = await Category.find().lean();

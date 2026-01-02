@@ -1,7 +1,8 @@
-import { CiSearch } from "react-icons/ci";
-import { useProductsStore } from "@/src/store";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
+'use client';
+import { CiSearch } from 'react-icons/ci';
+import { useProductsStore } from '@/src/store';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 export const BuscadorProducto = () => {
   const pathName = usePathname();
@@ -10,10 +11,9 @@ export const BuscadorProducto = () => {
   const { search, setSearch } = useProductsStore();
 
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      console.log("a");
+    if (e.key === 'Enter') {
       const params = new URLSearchParams(searchParams);
-      params.set("search", search.toString());
+      params.set('search', search.toString());
       router.push(`${pathName}?${params.toString()}`);
     }
   };

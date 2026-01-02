@@ -1,4 +1,4 @@
-import { model, models, Schema } from "mongoose";
+import { model, models, Schema } from 'mongoose';
 
 const productSchema = new Schema({
   _id: {
@@ -29,7 +29,7 @@ const productSchema = new Schema({
     default: [],
   },
   rubro: {
-    type: String,
+    type: Number,
     required: true,
     trim: true,
   },
@@ -44,4 +44,4 @@ const productSchema = new Schema({
   },
 });
 
-export const Product = models.Product || model("Product", productSchema);
+export const Product = models.Product || model('Product', productSchema);

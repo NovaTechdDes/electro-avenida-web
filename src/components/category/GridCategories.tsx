@@ -1,4 +1,4 @@
-import { getCategory } from "@/src/actions/category-actions";
+import { getCategories } from "@/src/actions/category-actions";
 import { CategoryCard } from "./CategoryCard";
 import { iconsMaps } from "@/src/seed/icons";
 import { unstable_noStore as noStore } from "next/cache";
@@ -6,7 +6,7 @@ import { unstable_noStore as noStore } from "next/cache";
 export const GridCategories = async () => {
   noStore();
 
-  const { categories, ok } = await getCategory();
+  const { categories, ok } = await getCategories();
 
   if (!ok) {
     return;
