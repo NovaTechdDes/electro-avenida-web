@@ -1,23 +1,32 @@
 'use client';
 
 import { login } from '@/src/actions';
+import { redirect } from 'next/navigation';
 import { useState } from 'react';
 
 const LoginPage = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
 
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    login(email, password);
+    const { ok, message } = await login(email, password);
+
+    if (ok) {
+      redirect('/admin');
+    }
+
+    setError(message);
   };
   return (
     <div className="">
       <section className="p-10 rounded-md shadow-md  dark:bg-gray-800">
-        <h1 className="text-2xl font-bold dark:text-white">Iniciar Sesion</h1>
+        <h1 className="text-2xl text-center font-bold dark:text-white">Iniciar Sesion</h1>
 
         <form action="" className="flex flex-col gap-5 mt-5" onSubmit={handleLogin}>
           <div className="">
+            {error && <p className="text-red-500">{error}</p>}
             <label htmlFor="email">Correo Electronico</label>
             <input
               value={email}

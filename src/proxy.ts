@@ -7,23 +7,29 @@ export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   if (!token) {
-    return NextResponse.redirect(new URL('/auth/login', req.url));
+    if (pathname.startsWith('/auth')) {
+      return NextResponse.next();
+    }
+    return NextResponse.redirect(new URL('/auth/login', req.nextUrl.origin));
   }
-  console.log(token);
   try {
-    const { id } = jwt.verify(token, process.env.JWT_SECRET!) as { id: string };
+    const session = jwt.verify(token, process.env.JWT_SECRET!) as { id: string };
 
-    if (id && pathname === '/auth/login') {
+    if (session && pathname === '/auth/login') {
       return NextResponse.redirect(new URL('/admin', req.url));
     }
 
     return NextResponse.next();
   } catch (error) {
-    console.log(error);
+    if (error instanceof jwt.TokenExpiredError) {
+      const res = NextResponse.next();
+      res.cookies.delete('auth');
+      return res;
+    }
     return NextResponse.redirect(new URL('/auth/login', req.url));
   }
 }
 
 export const config = {
-  matcher: ['/:path*'],
+  matcher: ['/auth/:path*', '/admin/:path*'],
 };
