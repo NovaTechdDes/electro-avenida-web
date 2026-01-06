@@ -1,21 +1,18 @@
-import { dbConnect } from "@/src/lib/dbConect";
-import { Product } from "@/src/models";
-import { NextResponse } from "next/server";
+import { dbConnect } from '@/src/lib/dbConect';
+import { Product } from '@/src/models';
+import { NextResponse } from 'next/server';
 
-export async function GET(
-  request: Request,
-  { params }: { params: Promise<{ id: string }> }
-): Promise<Response> {
+export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }): Promise<Response> {
   try {
     await dbConnect();
     const { id } = await params;
 
-    const product = await Product.findById(id);
+    const product = await Product.findById(id).lean();
 
     if (!product) {
       return NextResponse.json({
         ok: false,
-        message: "Producto no encontrado",
+        message: 'Producto no encontrado',
       });
     }
 
@@ -27,7 +24,7 @@ export async function GET(
     console.log(error);
     return NextResponse.json({
       ok: false,
-      message: "Error al obtener el producto",
+      message: 'Error al obtener el producto',
     });
   }
 }

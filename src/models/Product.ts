@@ -6,7 +6,7 @@ const productSchema = new Schema({
     required: true,
     trim: true,
   },
-  nombre: {
+  descripcion: {
     type: String,
     required: true,
     trim: true,
@@ -35,7 +35,6 @@ const productSchema = new Schema({
   },
   subRubro: {
     type: String,
-    required: true,
     trim: true,
   },
   imagenes: {

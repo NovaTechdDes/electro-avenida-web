@@ -5,11 +5,15 @@ import { NextResponse } from 'next/server';
 export async function GET(request: Request) {
   try {
     await dbConnect();
-    const categories = await Category.find();
-
+    const categories = await Category.find().lean();
+    const safeCategories = categories.map((category) => ({
+      ...category,
+      _id: category._id.toString(),
+    }));
+    console.log(safeCategories);
     return NextResponse.json({
       ok: true,
-      categories,
+      safeCategories,
     });
   } catch (error) {
     console.log(error);

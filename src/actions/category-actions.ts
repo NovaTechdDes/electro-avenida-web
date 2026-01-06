@@ -1,21 +1,20 @@
-"use server";
-import { dbConnect } from "../lib/dbConect";
-import { Category } from "../models";
+'use server';
+import axios from 'axios';
 
 export const getCategories = async () => {
   try {
-    await dbConnect();
-    const categories = await Category.find().lean();
+    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/categories`);
+
     return {
       ok: true,
-      categories,
+      categories: data.safeCategories,
     };
   } catch (error) {
     console.log(error);
     return {
       ok: false,
       categories: [],
-      msg: "No se pudo obtener las categorias",
+      msg: 'No se pudo obtener las categorias',
     };
   }
 };

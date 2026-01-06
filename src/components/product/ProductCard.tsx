@@ -18,7 +18,7 @@ export const ProductCard = ({ product, isEditable = false }: Props) => {
   return (
     <div className="border border-gray-400 rounded-lg justify-center flex flex-col cursor-pointer ">
       <div className="rounded-t-lg w-full ">
-        {imagenes?.length > 0 && (
+        {imagenes?.length > 0 && imagenes?.[0] !== '' && (
           <Image src={imagenes?.[0] ?? ''} alt={descripcion} width={200} height={200} className="w-full rounded-t-lg h-70 object-cover transition-transform duration-300 ease-in-out hover:scale-105" />
         )}
       </div>

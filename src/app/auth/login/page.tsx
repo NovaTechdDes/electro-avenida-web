@@ -21,13 +21,15 @@ const LoginPage = () => {
   };
   return (
     <div className="">
-      <section className="p-10 rounded-md shadow-md  dark:bg-gray-800">
-        <h1 className="text-2xl text-center font-bold dark:text-white">Iniciar Sesion</h1>
+      <section className="p-10 rounded-md shadow-md bg-gray-300 dark:bg-gray-800 border border-gray-300 dark:border-gray-600">
+        <h1 className="text-2xl text-center font-bold dark:text-white text-black">Iniciar Sesion</h1>
 
         <form action="" className="flex flex-col gap-5 mt-5" onSubmit={handleLogin}>
           <div className="">
             {error && <p className="text-red-500">{error}</p>}
-            <label htmlFor="email">Correo Electronico</label>
+            <label htmlFor="email" className="text-black dark:text-white">
+              Correo Electronico
+            </label>
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -35,12 +37,14 @@ const LoginPage = () => {
               name="email"
               id="email"
               placeholder="algo@gmail.com"
-              className="px-2 py-2 w-full border border-gray-300 dark:border-gray-600 rounded-md p-2"
+              className="px-2 py-2 w-full border border-gray-600 dark:border-gray-600 rounded-md p-2 dark:text-white text-black dark:placeholder:text-white"
             />
           </div>
 
           <div className="">
-            <label htmlFor="password">Contraseña</label>
+            <label htmlFor="password" className="text-black dark:text-white">
+              Contraseña
+            </label>
             <input
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -48,7 +52,7 @@ const LoginPage = () => {
               placeholder="********"
               name="password"
               id="password"
-              className="px-2 py-2 w-full border border-gray-300 dark:border-gray-600 rounded-md p-2"
+              className="px-2 py-2 w-full border border-gray-600 dark:border-gray-600 rounded-md p-2 dark:text-white text-black dark:placeholder:text-white"
             />
           </div>
           <button type="submit" className="w-full bg-yellow-500 text-black p-2 rounded-md hover:bg-yellow-400 cursor-pointer">

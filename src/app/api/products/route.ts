@@ -18,7 +18,7 @@ export async function GET(req: Request) {
     const search = searchParams.get('search') || '';
     const category = searchParams.get('category') || '';
 
-    const categoryId = await Category.findOne({ nombre: category }).select('codigo');
+    const categoryId = await Category.findOne({ nombre: category }).select('codigo').lean();
 
     const query: Query = { web: true };
 
@@ -32,7 +32,10 @@ export async function GET(req: Request) {
       query.rubro = categoryId.codigo;
     }
 
+    console.log(query);
+
     const [products, total] = await Promise.all([Product.find(query).skip(skip).limit(limit).lean(), Product.countDocuments(query)]);
+    console.log(products);
 
     return NextResponse.json({
       ok: true,
@@ -46,6 +49,26 @@ export async function GET(req: Request) {
     return NextResponse.json({
       ok: false,
       message: 'Error al obtener los productos',
+    });
+  }
+}
+
+export async function POST(req: Request) {
+  try {
+    await dbConnect();
+    const body = await req.json();
+    console.log('BODY');
+    console.log(body);
+    const product = await Product.create(body);
+    return NextResponse.json({
+      ok: true,
+      product,
+    });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({
+      ok: false,
+      message: 'Error al crear el producto',
     });
   }
 }

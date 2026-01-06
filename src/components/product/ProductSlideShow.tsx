@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Swiper as SwiperObjet } from "swiper";
-import { SwiperSlide, Swiper } from "swiper/react";
+import { useState } from 'react';
+import { Swiper as SwiperObjet } from 'swiper';
+import { SwiperSlide, Swiper } from 'swiper/react';
 
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
 
 //import "./slideShow.css";
-import { Autoplay, FreeMode, Navigation, Thumbs } from "swiper/modules";
-import Image from "next/image";
+import { Autoplay, FreeMode, Navigation, Thumbs } from 'swiper/modules';
+import Image from 'next/image';
 
 interface Props {
   images: string[];
@@ -21,6 +21,8 @@ interface Props {
 
 export const ProductSlideShow = ({ images, descripcion, className }: Props) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperObjet>();
+
+  if (images.length === 0) return null;
 
   return (
     <div className={`flex flex-col ${className}`}>
@@ -36,39 +38,23 @@ export const ProductSlideShow = ({ images, descripcion, className }: Props) => {
         modules={[FreeMode, Navigation, Thumbs, Autoplay]}
         className="mySwiper"
       >
-        {images.map((image) => (
-          <SwiperSlide key={image}>
-            <Image
-              src={`${image}`}
-              alt={descripcion}
-              width={1024}
-              height={800}
-              className="rounded-lg object-fill "
-            />
-          </SwiperSlide>
-        ))}
+        {images.map((image) =>
+          image === '' ? null : (
+            <SwiperSlide key={image}>
+              <Image src={`${image}`} alt={descripcion} width={1024} height={800} className="rounded-lg object-fill " />
+            </SwiperSlide>
+          )
+        )}
       </Swiper>
 
-      <Swiper
-        onSwiper={setThumbsSwiper}
-        spaceBetween={10}
-        slidesPerView={4}
-        freeMode={true}
-        watchSlidesProgress={true}
-        modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper"
-      >
-        {images.map((image) => (
-          <SwiperSlide key={image}>
-            <Image
-              src={`${image}`}
-              alt={descripcion}
-              width={300}
-              height={300}
-              className="rounded-lg object-fill mt-5"
-            />
-          </SwiperSlide>
-        ))}
+      <Swiper onSwiper={setThumbsSwiper} spaceBetween={10} slidesPerView={4} freeMode={true} watchSlidesProgress={true} modules={[FreeMode, Navigation, Thumbs]} className="mySwiper">
+        {images.map((image) =>
+          image === '' ? null : (
+            <SwiperSlide key={image}>
+              <Image src={`${image}`} alt={descripcion} width={300} height={300} className="rounded-lg object-fill mt-5" />
+            </SwiperSlide>
+          )
+        )}
       </Swiper>
     </div>
   );
