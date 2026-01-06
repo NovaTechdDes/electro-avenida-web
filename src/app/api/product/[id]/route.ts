@@ -21,7 +21,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
       product,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return NextResponse.json({
       ok: false,
       message: 'Error al obtener el producto',

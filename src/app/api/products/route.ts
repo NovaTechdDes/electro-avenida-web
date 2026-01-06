@@ -32,10 +32,7 @@ export async function GET(req: Request) {
       query.rubro = categoryId.codigo;
     }
 
-    console.log(query);
-
     const [products, total] = await Promise.all([Product.find(query).skip(skip).limit(limit).lean(), Product.countDocuments(query)]);
-    console.log(products);
 
     return NextResponse.json({
       ok: true,
@@ -57,8 +54,6 @@ export async function POST(req: Request) {
   try {
     await dbConnect();
     const body = await req.json();
-    console.log('BODY');
-    console.log(body);
     const product = await Product.create(body);
     return NextResponse.json({
       ok: true,

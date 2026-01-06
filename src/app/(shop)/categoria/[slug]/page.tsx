@@ -17,15 +17,11 @@ const CategoriaSlugPage = async ({ params, searchParams }: Props) => {
   const { slug } = await params;
   const { page, limit, search } = await searchParams;
 
-  console.log({ page, limit, search });
-
   const { ok, products, totalPages } = await getProductsByCategory(slug, Number(page), Number(limit), search);
 
   if (!ok) {
     return;
   }
-
-  console.log(totalPages);
 
   return (
     <div className="min-h-[90vh] pt-25 bg-[#171717]">

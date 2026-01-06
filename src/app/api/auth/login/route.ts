@@ -36,7 +36,7 @@ export async function POST(req: Request) {
 
     return res;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return Response.json({ ok: false, error: 'Error al iniciar sesión' }, { status: 500 });
   }
 }

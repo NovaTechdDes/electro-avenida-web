@@ -51,7 +51,7 @@ export const getProductsByCategory = async (category: string, page: number = 1, 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products?category=${category}&page=${page}&limit=${limit}&search=${search}`);
     return await res.json();
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return {
       ok: false,
       products: [],
@@ -78,7 +78,6 @@ export const createProduct = async (product: Product): Promise<ProductResponse> 
 export const verificarId = async (id: string): Promise<ProductResponse> => {
   try {
     const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/product/${id}`);
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);

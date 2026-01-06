@@ -10,7 +10,7 @@ export const getCategories = async () => {
       categories: data.safeCategories,
     };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return {
       ok: false,
       categories: [],

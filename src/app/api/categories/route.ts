@@ -10,13 +10,13 @@ export async function GET(request: Request) {
       ...category,
       _id: category._id.toString(),
     }));
-    console.log(safeCategories);
+
     return NextResponse.json({
       ok: true,
       safeCategories,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return NextResponse.json({
       ok: false,
       message: 'Error al obtener las categorías',
